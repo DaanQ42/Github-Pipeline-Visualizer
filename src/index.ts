@@ -13,10 +13,10 @@ server.on("close", () => {
   process.exit(0);
 });
 
-process.on("SIGKILL", () => shutdown("SIGTERM"));
-process.on("SIGTERM", () => shutdown("SIGTERM"));
-
 function shutdown(event: string) {
   console.log("SIGTERM");
   server.close();
 }
+
+process.on("SIGKILL", () => shutdown("SIGTERM"));
+process.on("SIGTERM", () => shutdown("SIGTERM"));
