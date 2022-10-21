@@ -1,5 +1,8 @@
 import { Response, Request } from "express";
 import { ping } from "./ping";
+import { workflow_dispatch } from "./workflow_dispatch";
+import { workflow_job } from "./workflow_job";
+import { workflow_run } from "./workflow_run";
 
 type WebhookEvent = (req: Request, response: Response) => void;
 type WebhookEvents = Record<string, WebhookEvent>;
@@ -8,6 +11,9 @@ type MethodMap = Record<string, WebhookEvents>;
 const map: MethodMap = {
   post: {
     ping: ping,
+    workflow_dispatch: workflow_dispatch,
+    workflow_job: workflow_job,
+    workflow_run: workflow_run,
   },
 };
 
