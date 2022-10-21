@@ -1,0 +1,28 @@
+{
+  "name": "github-pipeline-visualizer",
+  "version": "1.0.0",
+  "description": "A github pipeline visualizer",
+  "main": "dist/index.js",
+  "scripts": {
+    "compile": "tsc",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DaanQ42/github-pipeline-visualizer.git"
+  },
+  "keywords": [
+    "Github",
+    "Pipeline",
+    "Visualizer"
+  ],
+  "author": "DaanV2",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/DaanQ42/github-pipeline-visualizer/issues"
+  },
+  "homepage": "https://github.com/DaanQ42/github-pipeline-visualizer#readme",
+  "devDependencies": {
+    "typescript": "^4.8.4"
+  }
+}
