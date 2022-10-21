@@ -5,7 +5,7 @@ const router = express.Router();
 const pagesFolder = path.join(__dirname, "..", "..", "..", "pages");
 
 router.get("/simple", (req, res) => {
-  console.log(`simple.html ${pagesFolder}`);
+  console.log(`${pagesFolder}/simple.html`);
   res.sendFile(pagesFolder, "simple.html");
 });
 
