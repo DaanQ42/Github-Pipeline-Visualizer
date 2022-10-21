@@ -4,6 +4,7 @@ import { Sender } from "./sender";
 
 export interface WorkflowJob {
   conclusion: string | null;
+  id: number;
   labels: string[];
   organization: Organization;
   repository: Repository;
