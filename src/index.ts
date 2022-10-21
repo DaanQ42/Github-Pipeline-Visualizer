@@ -4,6 +4,7 @@ function main() {
   return new Promise<void>((resolve, reject) => {
     try {
       const app = newServer();
+      console.info("Starting server");
       const server = app.listen(25564);
 
       process.on("SIGTERM", () => server.close());

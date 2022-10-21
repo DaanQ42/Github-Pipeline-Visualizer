@@ -1,13 +1,12 @@
 import express from "express";
 
+const routes = require("./routes/index");
+
 export function newServer() {
   console.log("Setup new server");
   const app = express();
 
-  app.get("/", function (req, res) {
-    res.send("Hello World");
-    console.log(req);
-  });
+  app.use("/", routes);
 
   return app;
 }
