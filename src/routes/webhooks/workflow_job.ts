@@ -12,4 +12,5 @@ export function workflow_job(req: Request, res: Response) {
   const job = body.workflow_job;
 
   console.log(`workflow_job: ${job.runner_name} ${job.conclusion} ${job.status}`);
+  res.send("ok");
 }
