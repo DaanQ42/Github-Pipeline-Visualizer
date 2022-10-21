@@ -1,4 +1,5 @@
 import { Response, Request } from "express";
+import { JobData } from "../../data/data";
 import { Github } from "../../lib";
 import { WorkflowJob } from "../../lib/github/workflow_job";
 
@@ -11,6 +12,8 @@ export function workflow_job(req: Request, res: Response) {
   const body = req.body as Payload;
   const job = body.workflow_job;
 
-  console.log("workflow_job", job);
+  if (job) {
+    JobData.update(job);
+  }
   res.send("ok");
 }
