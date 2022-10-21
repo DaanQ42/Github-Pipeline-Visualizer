@@ -1,35 +1,9 @@
-import { setupServer } from "./server";
+import express from "express";
+const app = express();
 
-function main(resolve: (value?: any) => void, reject: (e: Error) => void) {
-  const server = setupServer();
+app.get("/", function (req, res) {
+  res.send("Hello World");
+  console.log(req);
+});
 
-  process.on("SIGTERM", () => {
-    console.log("Closing server");
-    server.close();
-  });
-
-  console.log("Starting server");
-  server.listen(25564);
-
-  server.on("close", () => resolve());
-}
-
-function loop() {
-  return new Promise((resolve, reject) => {
-    try {
-      main(resolve, reject);
-    } catch (e) {
-      reject(e);
-    }
-  });
-}
-
-loop()
-  .then(() => {
-    console.log("Server closed");
-    process.exit(0);
-  })
-  .catch((err) => {
-    console.error(err);
-    process.exit(1);
-  });
+app.listen(3000);
