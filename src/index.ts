@@ -3,12 +3,18 @@ import { setupServer } from "./server";
 async function main() {
   const server = setupServer();
 
+  process.on("SIGTERM", () => {
+    console.log("Closing server");
+    server.close();
+  });
+
+  console.log("Starting server");
   await server.listen();
 }
 
 main()
   .then(() => {
-    console.log("Done");
+    console.log("Server closed");
   })
   .catch((err) => {
     console.error(err);
