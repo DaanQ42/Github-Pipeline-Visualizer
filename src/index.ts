@@ -6,7 +6,6 @@ function main() {
       const app = newServer();
       const server = app.listen(25564);
 
-      process.on("SIGKILL", () => server.close());
       process.on("SIGTERM", () => server.close());
 
       server.on("close", () => {
