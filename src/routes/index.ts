@@ -5,4 +5,4 @@ const webhookRouter = require("./webhook");
 
 router.use("/webhook", webhookRouter);
 
-export default router;
+module.exports = router;

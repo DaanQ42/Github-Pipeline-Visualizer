@@ -5,3 +5,5 @@ router.get("/", (req, res) => {
   console.log(req);
   res.send("ping");
 });
+
+module.exports = router;
