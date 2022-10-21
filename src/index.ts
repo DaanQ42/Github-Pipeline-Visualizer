@@ -6,4 +6,17 @@ app.get("/", function (req, res) {
   console.log(req);
 });
 
-app.listen(3000);
+const server = app.listen(3000);
+
+server.on("close", () => {
+  console.log("Server closed");
+  process.exit(0);
+});
+
+process.on("SIGKILL", () => shutdown("SIGTERM"));
+process.on("SIGTERM", () => shutdown("SIGTERM"));
+
+function shutdown(event: string) {
+  console.log("SIGTERM");
+  server.close();
+}
