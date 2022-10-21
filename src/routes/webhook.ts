@@ -9,12 +9,16 @@ router.use((req, res, next) => {
 });
 
 router.get("/", (req, res) => {
-  console.log(req);
+  const payload = req.body;
+  console.log(payload);
+
   res.send("ping");
 });
 
 router.post("/", (req, res) => {
-  console.log(req);
+  const payload = req.body;
+  console.log(payload);
+
   res.send("pong");
 });
 
