@@ -1,4 +1,10 @@
-async function main() {}
+import { setupServer } from "./server";
+
+async function main() {
+  const server = setupServer();
+
+  await server.listen();
+}
 
 main()
   .then(() => {
