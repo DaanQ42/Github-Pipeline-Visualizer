@@ -1,4 +1,7 @@
 import express from "express";
+
+import * as webhooks from "./webhooks/index";
+
 const router = express.Router();
 
 router.use((req, res, next) => {
@@ -8,18 +11,8 @@ router.use((req, res, next) => {
   next();
 });
 
-router.get("/", (req, res) => {
-  const payload = req.body;
-  console.log(req);
-
-  res.send("ping");
-});
-
 router.post("/", (req, res) => {
-  const payload = req.body;
-  console.log(req);
-
-  res.send("pong");
+  webhooks.Webhooks.post(req.get("x-github-event"), req, res);
 });
 
 module.exports = router;
