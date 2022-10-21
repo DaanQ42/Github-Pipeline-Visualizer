@@ -13,4 +13,5 @@ export function workflow_dispatch(req: Request, res: Response) {
   const body = req.body as Payload;
 
   console.log(`workflow_dispatch: ${body.repository.name} with: ${JSON.stringify(body.inputs)}`);
+  res.send("ok");
 }
