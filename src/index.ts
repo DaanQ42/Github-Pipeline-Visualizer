@@ -6,7 +6,7 @@ app.get("/", function (req, res) {
   console.log(req);
 });
 
-const server = app.listen(3000);
+const server = app.listen(25564);
 
 server.on("close", () => {
   console.log("Server closed");
