@@ -6,6 +6,9 @@ export function newServer() {
   console.log("Setup new server");
   const app = express();
 
+  app.use(express.json());
+  app.use(express.urlencoded());
+
   app.use("/", routes);
 
   return app;
