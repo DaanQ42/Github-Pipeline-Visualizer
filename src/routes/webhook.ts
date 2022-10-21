@@ -10,14 +10,14 @@ router.use((req, res, next) => {
 
 router.get("/", (req, res) => {
   const payload = req.body;
-  console.log(payload);
+  console.log(req);
 
   res.send("ping");
 });
 
 router.post("/", (req, res) => {
   const payload = req.body;
-  console.log(payload);
+  console.log(req);
 
   res.send("pong");
 });
