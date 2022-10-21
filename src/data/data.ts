@@ -6,4 +6,8 @@ export namespace JobData {
   export function update(job: WorkflowJob): void {
     data[job.id] = job;
   }
+
+  export function get(id: number): WorkflowJob {
+    return data[id] || { id: id, conclusion: "missing" };
+  }
 }
