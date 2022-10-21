@@ -2,10 +2,9 @@ import express from "express";
 const router = express.Router();
 
 const webhookRouter = require("./webhook");
-const pagesRouter = require("./pages");
 const apiRouter = require("./api");
 
 router.use("/webhook", webhookRouter);
-router.use("/page", pagesRouter);
+router.use("/api", apiRouter);
 
 module.exports = router;
