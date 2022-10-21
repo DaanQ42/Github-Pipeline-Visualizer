@@ -1,22 +1,29 @@
-import express from "express";
-const app = express();
+import { newServer } from "./app";
 
-app.get("/", function (req, res) {
-  res.send("Hello World");
-  console.log(req);
-});
+function main() {
+  return new Promise<void>((resolve, reject) => {
+    try {
+      const app = newServer();
+      const server = app.listen(25564);
 
-const server = app.listen(25564);
+      process.on("SIGKILL", () => server.close());
+      process.on("SIGTERM", () => server.close());
 
-server.on("close", () => {
-  console.log("Server closed");
-  process.exit(0);
-});
-
-function shutdown(event: string) {
-  console.log("SIGTERM");
-  server.close();
+      server.on("close", () => {
+        resolve();
+      });
+    } catch (err) {
+      reject(err);
+    }
+  });
 }
 
-process.on("SIGKILL", () => shutdown("SIGTERM"));
-process.on("SIGTERM", () => shutdown("SIGTERM"));
+main()
+  .then(() => {
+    console.log("Server stopped");
+    process.exit(0);
+  })
+  .catch((err) => {
+    console.error(err);
+    process.exit(1);
+  });
