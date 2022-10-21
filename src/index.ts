@@ -1,6 +1,6 @@
 import { setupServer } from "./server";
 
-async function main() {
+function main(resolve: (value?: any) => void, reject: (e: Error) => void) {
   const server = setupServer();
 
   process.on("SIGTERM", () => {
@@ -9,10 +9,22 @@ async function main() {
   });
 
   console.log("Starting server");
-  await server.listen(25564);
+  server.listen(25564);
+
+  server.on("close", () => resolve());
 }
 
-main()
+function loop() {
+  return new Promise((resolve, reject) => {
+    try {
+      main(resolve, reject);
+    } catch (e) {
+      reject(e);
+    }
+  });
+}
+
+loop()
   .then(() => {
     console.log("Server closed");
     process.exit(0);
