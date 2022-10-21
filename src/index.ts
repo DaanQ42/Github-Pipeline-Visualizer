@@ -9,7 +9,7 @@ async function main() {
   });
 
   console.log("Starting server");
-  await server.listen();
+  await server.listen(25564);
 }
 
 main()
