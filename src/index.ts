@@ -1,5 +1,5 @@
 import { newServer } from "./app";
-import { setupWebsocketReceiver } from "./routes/websockets/server";
+import { setupWebsocketReceiver } from "./websockets/server";
 
 function main() {
   return new Promise<void>((resolve, reject) => {

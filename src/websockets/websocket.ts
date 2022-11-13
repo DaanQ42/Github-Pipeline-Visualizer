@@ -1,4 +1,4 @@
-import { JobData } from "../../data/data";
+import { JobData } from "../data/data";
 import { WebSocket } from "ws";
 
 /**
