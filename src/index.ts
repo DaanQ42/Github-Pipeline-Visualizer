@@ -1,4 +1,5 @@
 import { newServer } from "./app";
+import { setupWebsocketReceiver } from "./routes/websockets/server";
 
 function main() {
   return new Promise<void>((resolve, reject) => {
@@ -6,6 +7,7 @@ function main() {
       const app = newServer();
       console.info("Starting server");
       const server = app.listen(25564);
+      setupWebsocketReceiver(server);
 
       process.on("SIGTERM", () => server.close());
 

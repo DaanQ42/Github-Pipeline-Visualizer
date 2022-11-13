@@ -10,4 +10,8 @@ export namespace JobData {
   export function get(id: number): WorkflowJob {
     return data[id] || { id: id, conclusion: "missing" };
   }
+
+  export function forEach(cb: (job: WorkflowJob) => void): void {
+    Object.entries(data).forEach(([_, job]) => cb(job));
+  }
 }

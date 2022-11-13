@@ -8,6 +8,7 @@ export function newServer() {
   const app = express();
 
   app.use("/static", express.static(path.join(__dirname, "..", "static")));
+  app.use("/page", express.static(path.join(__dirname, "..", "static")));
 
   app.use(express.json());
   app.use(express.urlencoded());
