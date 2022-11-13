@@ -1,18 +1,18 @@
 import { JobData } from "../../data/data";
 import { WebSocket } from "ws";
 
+/**
+ * Setups the websocket between the server and listening clients.
+ * @param ws The websocket to setup.
+ */
 export function setupWebsocket(ws: WebSocket): void {
   const handleErr = (err: any) => {
-    console.log("Error sending job: %s", err);
+    console.log("Error sending job", err);
     ws.close(1006, "Error sending job data");
   };
 
   const ping = setInterval(() => {
-    ws.ping(undefined, undefined, handleErr);
-
-    let now = Date.now();
-    if ()
-
+    ws.ping({ time: Date.now() }, undefined, handleErr);
   }, 10 * 1000);
 
   let lastHeard = Date.now();
@@ -37,7 +37,5 @@ export function setupWebsocket(ws: WebSocket): void {
     .on("error", handleErr);
 
   //Send all relevant data to the client
-  JobData.forEach((job) => {
-    ws.send(job, handleErr);
-  });
+  JobData.forEach((job) => ws.send(job, handleErr));
 }
