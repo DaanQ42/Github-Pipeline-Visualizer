@@ -1,5 +1,6 @@
 import { WebSocketServer } from "ws";
 import { WorkflowJob } from "../lib/uniform/WorkflowJob";
+import { setupWebsocket } from "./websocket";
 import http from "http";
 
 var websocketServer: WebSocketServer;
@@ -20,7 +21,7 @@ export function setupWebsocketReceiver(server: http.Server) {
   });
 
   websocketServer.on("connection", (ws, req) => {
-    console.log("someone connected!");
+    setupWebsocket(ws);
   });
 
   return websocketServer;
