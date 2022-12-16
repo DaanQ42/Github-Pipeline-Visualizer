@@ -74,24 +74,17 @@ export class EventConnection {
     });
 
     this.ws.addEventListener("open", (ev) => {
-      console.log("Connection opened", ev);
       events.connection_state.forEach((fn) => fn("open", ev));
     });
     this.ws.addEventListener("close", (ev) => {
-      console.log("Connection closed", ev);
       events.connection_state.forEach((fn) => fn("close", ev));
     });
     this.ws.addEventListener("error", (ev) => {
-      console.log("Connection error", ev);
       events.on_error.forEach((fn) => fn(ev));
     });
     this.ws.addEventListener("message", (msg) => {
-      console.log("Message received", msg);
-
       if (msg.data instanceof Blob) {
         msg.data.text().then((text) => {
-          console.log("Message received", text);
-
           const data = JSON.parse(text);
           events.on_message.forEach((fn) => fn(data));
 

@@ -13,6 +13,26 @@
       body {
         padding-top: 50px;
       }
+      ,
+      .success: {
+        background-color: green;
+        transition: background-color 2s;
+      }
+      ,
+      .queued: {
+        background-color: gray;
+        transition: background-color 2s;
+      }
+      ,
+      .in_progress: {
+        background-color: yellow;
+        transition: background-color 2s;
+      }
+      ,
+      .completed: {
+        background-color: green;
+        transition: background-color 2s;
+      }
     </style>
   </head>
 
@@ -42,7 +62,7 @@
       });
       events.workflow_update((workflow_update) => {
         const job = get_job(workflow_update.id);
-        job.className = `workflow ${workflow_update.conclusion ?? ""}`;
+        job.className = `workflow ${workflow_update.conclusion ?? ""} ${workflow_update.status ?? ""}`;
         job.innerHTML = `
           <h2>${workflow_update.name}</h2>
           <p>${workflow_update.conclusion ?? ""}</p>
