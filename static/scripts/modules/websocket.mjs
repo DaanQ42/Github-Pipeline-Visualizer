@@ -12,10 +12,16 @@
  */
 
 /**
+ * @callback MessageFn
+ * @param {any} data
+ * @returns {void}
+ */
+
+/**
  * @typedef {Object} Events
  * @property {ConnectionStateFn[]} connection_state
  * @property {ErrorFn[]} on_error
- * @property {ErrorFn[]} on_message
+ * @property {MessageFn[]} on_message
  */
 
 /**
@@ -49,8 +55,8 @@ export class EventConnection {
     this.ws.addEventListener("error", (ev) => {
       events.on_error.forEach((fn) => fn(ev));
     });
-    this.ws.addEventListener("message", () => {
-      events.on_message.forEach((fn) => fn(ev));
+    this.ws.addEventListener("message", (msg) => {
+      events.on_message.forEach((fn) => fn(msg));
     });
   }
 
@@ -68,5 +74,13 @@ export class EventConnection {
    */
   on_error(fn) {
     this.events.on_error.push(fn);
+  }
+
+  /**
+   *
+   * @param {MessageFn} fn
+   */
+  on_message(fn) {
+    this.events.on_message.push(fn);
   }
 }
