@@ -6,8 +6,10 @@ import { WebSocket } from "ws";
  */
 export function handleWebsocket(ws: WebSocket): void {
   const handleErr = (err: any) => {
-    console.log("Error sending job", err);
-    ws.close(1006, "Error sending job data");
+    if (err) {
+      console.log("Error sending job", err);
+      ws.close(1006, "Error sending job data");
+    }
   };
 
   const ping = setInterval(() => {
