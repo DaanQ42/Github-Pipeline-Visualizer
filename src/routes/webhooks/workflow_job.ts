@@ -17,6 +17,7 @@ export function workflow_job(req: Request, res: Response) {
   //Strip any data and unwanted properties
   const result: uniform.WorkflowJob = {
     id: Identify.obfuscate(workflow_job.id),
+    name: workflow_job.name,
     conclusion: workflow_job.conclusion || "",
     status: workflow_job.status,
     labels: workflow_job.labels,

@@ -1,6 +1,7 @@
 export interface WorkflowJob {
   conclusion: string;
   id: string;
+  name: string;
   labels: string[];
   status: "queued" | "in_progress" | "completed";
   steps: WorkflowJobStep[];
