@@ -69,6 +69,10 @@
           return `<li class="step ${step.conclusion} ${step.status}">${step.name}</li>`;
         });
         job.innerHTML += `<ul>${steps.join("")}</ul>`;
+
+        if (job.status === "completed") {
+          setTimeout(() => job.remove(), 5000);
+        }
       });
     </script>
   </body>
