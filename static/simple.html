@@ -18,24 +18,36 @@
 
   <body>
     <h1 id="status"></h1>
-    <div class="container">
-      <a id="data"></a>
-    </div>
+    <div id="container"></div>
     <script type="module">
+      function get_job(job_id) {
+        const job = document.getElementById(`job-${job_id}`);
+
+        if (job) {
+          return job;
+        }
+
+        const container = document.getElementById("container");
+        const new_job = document.createElement("div");
+        new_job.id = `job-${job_id}`;
+        return;
+      }
+
       import { EventConnection } from "./scripts/modules/websocket.mjs";
       const host = window.location.host;
       const events = new EventConnection(`ws://${host}/websockets`);
 
-      events.on("message", (data) => {
-        document.getElementById("data").innerHTML += data;
+      events.on_connection_state((state) => {
+        document.getElementById("status").innerHTML = `Status: ${state}`;
       });
-      events.on("open", () => {
-        document.getElementById("status").innerHTML = "Connected";
+      events.on_message((message) => {
+        document.getElementById("data").innerHTML += JSON.stringify(message);
       });
-      events.on("close", () => {
-        document.getElementById("status").innerHTML = "Disconnected";
+      events.workflow_update((workflow_update) => {
+        const job = get_job(workflow_update.job_id);
+        job.className = `workflow ${workflow_update}`;
+        job.innerHTML = JSON.stringify(workflow_update);
       });
-      events.on("");
     </script>
   </body>
 </html>

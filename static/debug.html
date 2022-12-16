@@ -18,13 +18,12 @@
 
   <body>
     <h1 id="status"></h1>
-    <div class="container">
+    <div id="container">
       <a id="host"></a>
       <a id="data"></a>
     </div>
 
     <script type="module">
-      import { EventConnection } from "./scripts/modules/websocket.mjs";
       const host = window.location.host;
       const events = new EventConnection(`ws://${host}/websockets`);
 
