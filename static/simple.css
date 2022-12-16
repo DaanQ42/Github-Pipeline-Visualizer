@@ -4,16 +4,19 @@
 }
 
 .queued {
-  transition: text-align 2s;
+  transition: text-align 2s, align-content 2s;
   text-align: right;
+  align-content: flex-end;
 }
 .in_progress {
-  transition: text-align 2s;
+  transition: text-align 2s, align-content 2s;
   text-align: center;
+  align-content: center;
 }
 .completed {
-  transition: text-align 2s;
+  transition: text-align 2s, align-content 2s;
   text-align: left;
+  align-content: flex-start;
 }
 
 .workflow .step {
