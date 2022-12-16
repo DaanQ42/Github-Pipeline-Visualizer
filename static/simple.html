@@ -42,10 +42,8 @@
         });
         job.innerHTML += `<ul>${steps.join("")}</ul>`;
 
-        console.log("Status", job.status);
-        if (job.status === "completed") {
+        if (workflow_update.status === "completed") {
           setTimeout(() => {
-            console.log("Removing job", workflow_update.id);
             job.remove();
           }, 10000);
         }

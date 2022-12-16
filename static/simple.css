@@ -19,6 +19,7 @@
   opacity: 0;
   border-radius: 10px;
   border: 1px solid #ccc;
+  transition: position 0.5s, opacity 0.5s, transform 0.5s;
 }
 
 .workflow.current .step.current {
