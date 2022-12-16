@@ -23,6 +23,6 @@ export interface WorkflowJobStep {
   status: "queued" | "in_progress" | "completed";
   conclusion: string | null;
   number: number;
-  started_at: "2022-10-21T13:07:28.000Z";
-  completed_at: "2022-10-21T13:07:29.000Z";
+  started_at: string;
+  completed_at: string;
 }
