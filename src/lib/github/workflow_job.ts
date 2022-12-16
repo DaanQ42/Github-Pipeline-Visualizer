@@ -8,7 +8,7 @@ export interface WorkflowJob {
   labels: string[];
   name: string;
   organization: Organization;
-  repository: Repository;
+  repository?: Repository;
   runner_group_id: number;
   runner_group_name: string;
   runner_id: number;
