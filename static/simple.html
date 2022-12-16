@@ -40,9 +40,6 @@
       events.on_connection_state((state) => {
         document.getElementById("status").innerHTML = `Status: ${state}`;
       });
-      events.on_message((message) => {
-        document.getElementById("data").innerHTML += JSON.stringify(message);
-      });
       events.workflow_update((workflow_update) => {
         const job = get_job(workflow_update.job_id);
         job.className = `workflow ${workflow_update}`;
