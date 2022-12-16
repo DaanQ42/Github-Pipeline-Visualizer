@@ -35,6 +35,10 @@ export function setupWebsocketReceiver(server: http.Server) {
 }
 
 export function SendWorkflow(workflow: WorkflowJob) {
+  if (websocketServer.clients?.size === 0) {
+    console.log("No one is listening for workflow updates 😞");
+  }
+
   const msg = {
     type: "workflow",
     data: workflow,
@@ -46,7 +50,10 @@ export function SendWorkflow(workflow: WorkflowJob) {
   websocketServer.clients?.forEach((client) => {
     const buffer = Buffer.from(str);
     client.send(buffer, (err) => {
-      client.close(1000, "Closing connection");
+      if (err) {
+        console.log("Error sending job", err);
+        client.close(1006, "Error sending job data");
+      }
     });
   });
 }
