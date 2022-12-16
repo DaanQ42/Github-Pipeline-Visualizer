@@ -7,8 +7,11 @@ const router = express.Router();
 router.use((req, res, next) => {
   const sign = req.get("X-Hub-Signature-256");
 
-  console.log(`sign: ${sign}`);
-  next();
+  if (sign && sign.length > 0) {
+    next();
+  } else {
+    res.status(400).send("Bad Request");
+  }
 });
 
 router.post("/", (req, res) => {

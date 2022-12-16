@@ -1,8 +1,6 @@
 import { Response, Request } from "express";
 import { Github } from "../../lib";
 import { Repository } from "../../lib/github/repository";
-import { Identify } from "../../lib/uniform/ids";
-import * as uniform from "../../lib/uniform/WorkflowJob";
 
 interface Payload extends Github.Payload {
   inputs: Record<string, any>;
