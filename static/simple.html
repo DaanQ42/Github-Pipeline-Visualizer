@@ -21,7 +21,21 @@
         const new_job = document.createElement("div");
         container.appendChild(new_job);
         new_job.id = `job-${job_id}`;
+        new_job.innerHTML = `<h2 id="title" class="workflow">Loading...</h2><ul id="steps"></ul>`;
+
         return new_job;
+      }
+
+      function get_or_create(container, id) {
+        const element = document.getElementById(id);
+        if (element) {
+          return element;
+        }
+
+        const new_element = document.createElement("div");
+        container.appendChild(new_element);
+        new_element.id = id;
+        return new_element;
       }
 
       import { EventConnection } from "./scripts/modules/websocket.mjs";
@@ -33,14 +47,18 @@
       });
       events.workflow_update((workflow_update) => {
         const job = get_job(workflow_update.id);
-        job.innerHTML = `<h2 class="workflow ${workflow_update.conclusion ?? ""} ${workflow_update.status ?? ""}">${
-          workflow_update.name
-        }</h2>`;
+        const title = get_or_create(job, "title");
+        title.innerHTML = workflow_update.name;
+        title.className = `workflow ${workflow_update.conclusion ?? ""} ${workflow_update.status ?? ""}`;
+
+        const steps = get_or_create(job, "steps");
+
         // Converts the steps to a list
-        const steps = Object.values(workflow_update.steps).map((step) => {
-          return `<li class="step ${step.conclusion} ${step.status}">${step.name}</li>`;
+        Object.values(workflow_update.steps).forEach((step) => {
+          const step_element = get_or_create(steps, `step-${step.id}`);
+          step_element.className = `step ${step.conclusion ?? ""} ${step.status ?? ""}`;
+          step_element.innerHTML = step.name;
         });
-        job.innerHTML += `<ul>${steps.join("")}</ul>`;
 
         if (workflow_update.status === "completed") {
           setTimeout(() => {
