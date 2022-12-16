@@ -13,6 +13,8 @@
     <script type="module">
       function get_job(job_id) {
         const job = document.getElementById(`job-${job_id}`);
+
+        job.get;
         if (job) {
           return job;
         }
@@ -27,7 +29,7 @@
       }
 
       function get_or_create(container, id) {
-        const element = container.getElementById(id);
+        const element = document.getElementById(id);
         if (element) {
           return element;
         }
@@ -46,16 +48,18 @@
         document.getElementById("status").innerHTML = `Status: ${state}`;
       });
       events.workflow_update((workflow_update) => {
-        const job = get_job(workflow_update.id);
-        const title = get_or_create(job, "title");
+        const id = workflow_update.id;
+        const job = get_job(id);
+
+        const title = get_or_create(document, "title-" + id);
         title.innerHTML = workflow_update.name;
         title.className = `workflow ${workflow_update.conclusion ?? ""} ${workflow_update.status ?? ""}`;
 
-        const steps = get_or_create(job, "steps");
+        const steps = get_or_create(job, "steps-" + id);
 
         // Converts the steps to a list
         Object.values(workflow_update.steps).forEach((step) => {
-          const step_element = get_or_create(steps, `step-${step.number}`);
+          const step_element = get_or_create(steps, `step-${step.number}-${id}`);
           step_element.className = `step ${step.conclusion ?? ""} ${step.status ?? ""}`;
           step_element.innerHTML = step.name;
         });
