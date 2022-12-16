@@ -3,7 +3,6 @@ export interface WorkflowJob {
   id: string;
   labels: string[];
   name: string;
-  repository: string;
   status: "queued" | "in_progress" | "completed";
   steps: WorkflowJobStep[];
 }

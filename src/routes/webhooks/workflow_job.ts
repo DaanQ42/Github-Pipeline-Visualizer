@@ -14,8 +14,6 @@ export function workflow_job(req: Request, res: Response) {
   const { workflow_job } = req.body as Payload;
   res.send("ok");
 
-  console.log("repo", workflow_job);
-
   //Strip any data and unwanted properties
   const result: uniform.WorkflowJob = {
     id: Identify.obfuscate(workflow_job.id),
@@ -23,7 +21,6 @@ export function workflow_job(req: Request, res: Response) {
     conclusion: workflow_job.conclusion || "",
     status: workflow_job.status,
     labels: workflow_job.labels,
-    repository: workflow_job.repository?.name ?? "",
     steps: workflow_job.steps.map((step) => {
       return {
         name: step.name,
