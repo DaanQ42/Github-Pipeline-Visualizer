@@ -23,10 +23,11 @@
       <a id="data"></a>
     </div>
 
-    <script type="module" src="scripts/modules/websocket.js"></script>
     <script type="text/javascript">
+      import { EventConnection } from "./scripts/modules/websocket.mjs";
       const host = window.location.host;
       const events = new EventConnection(`ws://${host}/websockets`);
+
       document.getElementById("host").innerHTML = host;
 
       events.on("message", (data) => {
