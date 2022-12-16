@@ -1,6 +1,6 @@
 import { WebSocketServer } from "ws";
 import { WorkflowJob } from "../lib/uniform/WorkflowJob";
-import { setupWebsocket } from "./websocket";
+import { handleWebsocket } from "./websocket";
 import http from "http";
 
 var websocketServer: WebSocketServer;
@@ -13,15 +13,21 @@ export function setupWebsocketReceiver(server: http.Server) {
   });
 
   server.on("upgrade", (request, socket, head) => {
-    console.log("Upgrading to websocket", request.url);
-
     websocketServer.handleUpgrade(request, socket, head, (websocket) => {
       websocketServer.emit("connection", websocket, request);
     });
   });
 
   websocketServer.on("connection", (ws, req) => {
-    setupWebsocket(ws);
+    try {
+      handleWebsocket(ws);
+    } catch (err) {
+      console.log("Error handling websocket", err);
+
+      if (ws.readyState !== WebSocket.CLOSED) {
+        ws.close(1006, "Error on server side");
+      }
+    }
   });
 
   return websocketServer;

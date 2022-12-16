@@ -4,7 +4,7 @@ import { WebSocket } from "ws";
  * Setups the websocket between the server and listening clients.
  * @param ws The websocket to setup.
  */
-export function setupWebsocket(ws: WebSocket): void {
+export function handleWebsocket(ws: WebSocket): void {
   console.log("Websocket connected", ws.url, ws.protocol, ws.readyState);
 
   const handleErr = (err: any) => {
