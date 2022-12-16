@@ -41,9 +41,11 @@ export function SendWorkflow(workflow: WorkflowJob) {
   };
 
   console.log(`Sending ${msg.type} to ${websocketServer.clients?.size}`);
+  const str = JSON.stringify(msg);
 
   websocketServer.clients?.forEach((client) => {
-    client.send(msg, (err) => {
+    const buffer = Buffer.from(str);
+    client.send(buffer, (err) => {
       client.close(1000, "Closing connection");
     });
   });
