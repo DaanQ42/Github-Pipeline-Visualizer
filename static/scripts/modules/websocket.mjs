@@ -59,6 +59,11 @@ export class EventConnection {
       events.on_error.forEach((fn) => fn(ev));
     });
     this.ws.addEventListener("message", (msg) => {
+      if (Buffer.isBuffer(msg.data)) {
+        msg = msg.data.toString();
+        msg = JSON.parse(msg);
+      }
+
       console.log("Message received", msg);
       events.on_message.forEach((fn) => fn(msg));
     });
