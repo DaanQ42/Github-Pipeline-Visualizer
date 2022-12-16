@@ -59,6 +59,10 @@ export class EventConnection {
       events.on_error.forEach((fn) => fn(ev));
     });
     this.ws.addEventListener("message", (msg) => {
+      if (msg.data === undefined || msg.data === null) {
+        return;
+      }
+
       if (Buffer.isBuffer(msg.data)) {
         msg = msg.data.toString();
         msg = JSON.parse(msg);
