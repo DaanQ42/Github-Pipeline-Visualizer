@@ -61,12 +61,16 @@ export class EventConnection {
     this.ws.addEventListener("message", (msg) => {
       console.log("Message received", msg);
 
-      const str = msg.data.toString();
-      console.log("Buffer converted to string", str);
-      msg = JSON.parse(str);
-      console.log("Buffer parsed", msg);
+      if (msg.data instanceof Blob) {
+        reader = new FileReader();
+        reader.onload = () => {
+          console.log("Message received", reader.result);
 
-      events.on_message.forEach((fn) => fn(msg));
+          const data = JSON.parse(reader.result);
+          events.on_message.forEach((fn) => fn(data));
+        };
+        reader.readAsText(msg.data);
+      }
     });
   }
 
