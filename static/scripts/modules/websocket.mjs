@@ -18,10 +18,36 @@
  */
 
 /**
+ * @typedef {Object} WorkflowJob
+ * @property {string} conclusion
+ * @property {string} id
+ * @property {string[]} labels
+ * @property {"queued"|"in_progress"|"completed"} status
+ * @property {WorkflowJobStep[]} steps
+ */
+
+/**
+ * @typedef {Object} WorkflowJobStep
+ * @property {string} completed_at
+ * @property {string} conclusion
+ * @property {string} name
+ * @property {number} number
+ * @property {string} started_at
+ * @property {"queued"|"in_progress"|"completed"} status
+ */
+
+/**
+ * @typedef {Object} WorkflowJobFn
+ * @property {WorkflowJob} data
+ * @returns {void}
+ */
+
+/**
  * @typedef {Object} Events
  * @property {ConnectionStateFn[]} connection_state
  * @property {ErrorFn[]} on_error
  * @property {MessageFn[]} on_message
+ * @property {WorkflowJobFn[]} workflow_update
  */
 
 /**
@@ -44,6 +70,7 @@ export class EventConnection {
       connection_state: [],
       on_error: [],
       on_message: [],
+      workflow_update: [],
     });
 
     this.ws.addEventListener("open", (ev) => {
@@ -65,8 +92,14 @@ export class EventConnection {
         msg.data.text().then((text) => {
           console.log("Message received", text);
 
-          const data = JSON.parse(reader.result);
+          const data = JSON.parse(text.result);
           events.on_message.forEach((fn) => fn(data));
+
+          switch (data.type) {
+            case "workflow":
+              events.workflow_update.forEach((fn) => fn(data.data));
+              break;
+          }
         });
       }
     });
@@ -94,5 +127,12 @@ export class EventConnection {
    */
   on_message(fn) {
     this.events.on_message.push(fn);
+  }
+
+  /**
+   * @param {WorkflowJobFn} fn
+   */
+  workflow_update(fn) {
+    this.events.workflow_update.push(fn);
   }
 }
