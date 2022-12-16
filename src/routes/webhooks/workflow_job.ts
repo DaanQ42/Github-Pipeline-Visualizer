@@ -14,7 +14,7 @@ export function workflow_job(req: Request, res: Response) {
   const { workflow_job } = req.body as Payload;
   res.send("ok");
 
-  console.log("repo", workflow_job.repository);
+  console.log("repo", workflow_job);
 
   //Strip any data and unwanted properties
   const result: uniform.WorkflowJob = {
