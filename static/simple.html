@@ -26,13 +26,13 @@
         return new_job;
       }
 
-      function get_or_create(container, id) {
+      function get_or_create(container, id, type = "div") {
         const element = document.getElementById(id);
         if (element) {
           return element;
         }
 
-        const new_element = document.createElement("div");
+        const new_element = document.createElement(type);
         container.appendChild(new_element);
         new_element.id = id;
         return new_element;
@@ -49,15 +49,15 @@
         const id = workflow_update.id;
         const job = get_job(id);
 
-        const title = get_or_create(job, `title-${id}`);
+        const title = get_or_create(job, `title-${id}`, "h2");
         title.innerHTML = workflow_update.name;
         title.className = `workflow ${workflow_update.conclusion ?? ""} ${workflow_update.status ?? ""}`;
 
-        const steps = get_or_create(job, `steps-${id}`);
+        const steps = get_or_create(job, `steps-${id}`, "ul");
 
         // Converts the steps to a list
         Object.values(workflow_update.steps).forEach((step) => {
-          const step_element = get_or_create(steps, `step-${step.number}-${id}`);
+          const step_element = get_or_create(steps, `step-${step.number}-${id}`, "li");
           step_element.className = `step ${step.conclusion ?? ""} ${step.status ?? ""}`;
           step_element.innerHTML = step.name;
         });
