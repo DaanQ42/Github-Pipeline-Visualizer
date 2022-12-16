@@ -36,6 +36,9 @@
       events.on_error((error) => {
         document.getElementById("data").innerHTML += JSON.stringify(error);
       });
+      events.on_message((message) => {
+        document.getElementById("data").innerHTML += JSON.stringify(message);
+      });
     </script>
   </body>
 </html>

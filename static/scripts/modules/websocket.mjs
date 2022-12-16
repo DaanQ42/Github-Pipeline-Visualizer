@@ -15,6 +15,7 @@
  * @typedef {Object} Events
  * @property {ConnectionStateFn[]} connection_state
  * @property {ErrorFn[]} on_error
+ * @property {ErrorFn[]} on_message
  */
 
 /**
@@ -36,6 +37,7 @@ export class EventConnection {
     const events = (this.events = {
       connection_state: [],
       on_error: [],
+      on_message: [],
     });
 
     this.ws.addEventListener("open", (ev) => {
@@ -46,6 +48,9 @@ export class EventConnection {
     });
     this.ws.addEventListener("error", (ev) => {
       events.on_error.forEach((fn) => fn(ev));
+    });
+    this.ws.addEventListener("message", () => {
+      events.on_message.forEach((fn) => fn(ev));
     });
   }
 
