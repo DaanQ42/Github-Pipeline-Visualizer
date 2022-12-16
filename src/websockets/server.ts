@@ -20,7 +20,7 @@ export function setupWebsocketReceiver(server: http.Server) {
 
   websocketServer.on("connection", (ws, req) => {
     try {
-      console.info("Websocket connection established", req);
+      console.info("Websocket connection established", req.headers.origin);
       handleWebsocket(ws);
     } catch (err) {
       console.log("Error handling websocket", err);
