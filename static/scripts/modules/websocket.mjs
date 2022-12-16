@@ -38,13 +38,13 @@ export class EventConnection {
       on_error: [],
     });
 
-    this.ws.onopen((ev) => {
+    this.ws.addEventListener("open", (ev) => {
       events.connection_state.forEach((fn) => fn("open", ev));
     });
-    this.ws.onclose((ev) => {
+    this.ws.addEventListener("close", (ev) => {
       events.connection_state.forEach((fn) => fn("close", ev));
     });
-    this.ws.onerror((ev) => {
+    this.ws.addEventListener("error", (ev) => {
       events.on_error.forEach((fn) => fn(ev));
     });
   }
