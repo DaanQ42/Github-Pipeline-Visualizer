@@ -21,6 +21,7 @@ export function workflow_job(req: Request, res: Response) {
     conclusion: workflow_job.conclusion || "",
     status: workflow_job.status,
     labels: workflow_job.labels,
+    repository: workflow_job.repository.name,
     steps: workflow_job.steps.map((step) => {
       return {
         name: step.name,

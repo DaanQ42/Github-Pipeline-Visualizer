@@ -1,0 +1,16 @@
+.success {
+  background: green;
+  transition: background 2s;
+}
+.queued {
+  background: gray;
+  transition: background 2s;
+}
+.in_progress {
+  background: yellow;
+  transition: background 2s;
+}
+.completed {
+  background: green;
+  transition: background 2s;
+}
