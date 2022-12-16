@@ -61,16 +61,8 @@ export class EventConnection {
     this.ws.addEventListener("message", (msg) => {
       console.log("Message received", msg);
 
-      if (msg.data === undefined || msg.data === null) {
-        return;
-      }
-
-      if (Buffer.isBuffer(msg.data)) {
-        msg = msg.data.toString();
-        msg = JSON.parse(msg);
-
-        console.log("Buffer parsed", msg);
-      }
+      msg = JSON.parse(msg.data.toString());
+      console.log("Buffer parsed", msg);
 
       events.on_message.forEach((fn) => fn(msg));
     });
