@@ -12,6 +12,11 @@ export function setupWebsocketReceiver(server: http.Server) {
     clientTracking: true,
   });
 
+  process.on("beforeExit", () => {
+    console.log("Closing websocket server");
+    websocketServer.close();
+  });
+
   server.on("upgrade", (request, socket, head) => {
     websocketServer.handleUpgrade(request, socket, head, (websocket) => {
       websocketServer.emit("connection", websocket, request);
