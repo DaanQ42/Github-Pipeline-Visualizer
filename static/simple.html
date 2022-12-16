@@ -49,7 +49,7 @@
         const id = workflow_update.id;
         const job = get_job(id);
 
-        const title = get_or_create(document, `title-${id}`);
+        const title = get_or_create(job, `title-${id}`);
         title.innerHTML = workflow_update.name;
         title.className = `workflow ${workflow_update.conclusion ?? ""} ${workflow_update.status ?? ""}`;
 
