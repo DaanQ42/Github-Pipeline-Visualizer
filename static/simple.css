@@ -2,17 +2,18 @@
   background: green;
   transition: background 2s;
 }
+
 .queued {
-  background: gray;
-  transition: background 2s;
+  transition: text-align 2s;
+  text-align: right;
 }
 .in_progress {
-  background: yellow;
-  transition: background 2s;
+  transition: text-align 2s;
+  text-align: center;
 }
 .completed {
-  background: green;
-  transition: background 2s;
+  transition: text-align 2s;
+  text-align: left;
 }
 
 .workflow .step {
@@ -20,56 +21,4 @@
   border-radius: 10px;
   border: 1px solid #ccc;
   transition: position 0.5s, opacity 0.5s, transform 0.5s;
-}
-
-.workflow.current .step.current {
-  opacity: 1;
-  animation-name: fadeIn;
-  -webkit-animation-name: fadeIn;
-  animation-duration: 1.5s;
-  -webkit-animation-duration: 1.5s;
-  animation-timing-function: ease-in-out;
-  -webkit-animation-timing-function: ease-in-out;
-  visibility: visible !important;
-
-  opacity: 0;
-  border-radius: 10px;
-  border: 1px solid #ccc;
-  transition: position 0.5s, opacity 0.5s, transform 0.5s;
-}
-
-@keyframes fadeIn {
-  0% {
-    transform: scale(0);
-    opacity: 0;
-  }
-  60% {
-    transform: scale(1.1);
-  }
-  80% {
-    transform: scale(0.9);
-    opacity: 1;
-  }
-  100% {
-    transform: scale(1);
-    opacity: 1;
-  }
-}
-
-@-webkit-keyframes fadeIn {
-  0% {
-    -webkit-transform: scale(0);
-    opacity: 0;
-  }
-  60% {
-    -webkit-transform: scale(1.1);
-  }
-  80% {
-    -webkit-transform: scale(0.9);
-    opacity: 1;
-  }
-  100% {
-    -webkit-transform: scale(1);
-    opacity: 1;
-  }
 }
