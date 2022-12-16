@@ -13,7 +13,6 @@ export function handleWebsocket(ws: WebSocket): void {
   };
 
   const ping = setInterval(() => {
-    console.log("Pinging client");
     ws.ping(JSON.stringify({ time: Date.now() }), undefined, handleErr);
   }, 10 * 1000);
 
@@ -23,7 +22,7 @@ export function handleWebsocket(ws: WebSocket): void {
     console.log("Received message: %s", message);
   })
     .on("close", (code, reason) => {
-      console.log("Websocket closed", code, reason);
+      console.log("Websocket closed", code, reason.toString());
       clearInterval(ping);
     })
     .on("unexpected-response", (request, response) => {
