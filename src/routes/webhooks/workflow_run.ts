@@ -19,5 +19,5 @@ export function workflow_run(req: Request, res: Response) {
   const body = req.body as Payload;
   res.send("ok");
 
-  console.log(`Received workflow_run ${body.action} event`, body);
+  console.log(`Received workflow_run ${body.workflow_run.name} ${body.action}`);
 }
