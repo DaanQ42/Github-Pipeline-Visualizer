@@ -7,13 +7,15 @@ export function newServer() {
   console.log("Setup new server");
   const app = express();
 
-  app.use("/static", express.static(path.join(__dirname, "..", "static")));
-  app.use("/page", express.static(path.join(__dirname, "..", "static")));
+  const staticFiles = express.static(path.join(__dirname, "..", "static"), { index: "index.html" });
+  app.use("/static", staticFiles);
+  app.use("/page", staticFiles);
 
   app.use(express.json());
   app.use(express.urlencoded());
 
   app.use("/", routes);
+  app.get("/", (req, res) => res.redirect("/page/index.html"));
 
   return app;
 }
