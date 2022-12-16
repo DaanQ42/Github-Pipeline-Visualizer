@@ -9,9 +9,15 @@ interface Payload extends Github.Payload {
   workflow_run: WorkflowRun;
 }
 
+/**
+ *
+ * @see https://docs.github.com/developers/webhooks-and-events/webhooks/webhook-events-and-payloads#workflow_run
+ * @param req
+ * @param res
+ */
 export function workflow_run(req: Request, res: Response) {
   const body = req.body as Payload;
-
-  console.log(`workflow_run: ${body.workflow.name} ${body.action}`);
   res.send("ok");
+
+  console.log(`Received workflow_run ${body.action} event`, body);
 }
