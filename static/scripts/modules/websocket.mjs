@@ -62,14 +62,12 @@ export class EventConnection {
       console.log("Message received", msg);
 
       if (msg.data instanceof Blob) {
-        reader = new FileReader();
-        reader.onload = () => {
-          console.log("Message received", reader.result);
+        msg.data.text().then((text) => {
+          console.log("Message received", text);
 
           const data = JSON.parse(reader.result);
           events.on_message.forEach((fn) => fn(data));
-        };
-        reader.readAsText(msg.data);
+        });
       }
     });
   }
