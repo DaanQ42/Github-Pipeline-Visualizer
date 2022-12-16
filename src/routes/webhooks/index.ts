@@ -35,6 +35,7 @@ export namespace Webhooks {
     if (handler) {
       handler(req, res);
     } else {
+      console.log("Unknown event", event);
       //Just accept it and send
       res.send("ok");
     }
