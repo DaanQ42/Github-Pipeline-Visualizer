@@ -41,9 +41,12 @@
         document.getElementById("status").innerHTML = `Status: ${state}`;
       });
       events.workflow_update((workflow_update) => {
-        const job = get_job(workflow_update.job_id);
-        job.className = `workflow ${workflow_update}`;
-        job.innerHTML = JSON.stringify(workflow_update);
+        const job = get_job(workflow_update.id);
+        job.className = `workflow ${workflow_update.conclusion ?? ""}`;
+        job.innerHTML = `
+          <h2>${workflow_update.name}</h2>
+          <p>${workflow_update.conclusion ?? ""}</p>
+        `;
       });
     </script>
   </body>
