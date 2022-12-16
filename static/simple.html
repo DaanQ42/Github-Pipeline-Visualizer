@@ -35,13 +35,14 @@
         const job = get_job(workflow_update.id);
         job.innerHTML = `<h2 class="workflow ${workflow_update.conclusion ?? ""} ${workflow_update.status ?? ""}">${
           workflow_update.name
-        }</h2>\n<p>${workflow_update.conclusion ?? ""}</p>`;
+        }</h2>`;
         // Converts the steps to a list
         const steps = Object.values(workflow_update.steps).map((step) => {
           return `<li class="step ${step.conclusion} ${step.status}">${step.name}</li>`;
         });
         job.innerHTML += `<ul>${steps.join("")}</ul>`;
 
+        console.log("Status", job.status);
         if (job.status === "completed") {
           setTimeout(() => {
             console.log("Removing job", workflow_update.id);
