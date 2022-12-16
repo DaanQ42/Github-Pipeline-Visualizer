@@ -7,6 +7,7 @@
   transition: text-align 2s, align-content 2s;
   text-align: right;
   align-content: flex-end;
+  background: #ccc;
 }
 .in_progress {
   transition: text-align 2s, align-content 2s;
