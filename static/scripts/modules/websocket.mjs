@@ -92,7 +92,7 @@ export class EventConnection {
         msg.data.text().then((text) => {
           console.log("Message received", text);
 
-          const data = JSON.parse(text.result);
+          const data = JSON.parse(text);
           events.on_message.forEach((fn) => fn(data));
 
           switch (data.type) {

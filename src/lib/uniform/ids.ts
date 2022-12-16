@@ -1,6 +1,6 @@
 import * as crypto from "crypto";
 
-const salt = crypto.randomBytes(32).toString("base64");
+const salt = crypto.randomBytes(32).toString("hex");
 
 export namespace Identify {
   export function obfuscate(id: string | number): string {
@@ -10,7 +10,7 @@ export namespace Identify {
       id = id.toString();
     }
 
-    const result = hmac.update(id).digest("base64");
+    const result = hmac.update(id).digest("hex");
     return result;
   }
 }
