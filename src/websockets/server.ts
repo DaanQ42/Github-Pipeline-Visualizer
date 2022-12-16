@@ -12,12 +12,16 @@ export function setupWebsocketReceiver(server: http.Server) {
   });
 
   server.on("upgrade", (request, socket, head) => {
+    console.log("Upgrading to websocket", request.url);
+
     websocketServer.handleUpgrade(request, socket, head, (websocket) => {
       websocketServer.emit("connection", websocket, request);
     });
   });
 
-  websocketServer.on("connection", (ws, req) => {});
+  websocketServer.on("connection", (ws, req) => {
+    console.log("someone connected!");
+  });
 
   return websocketServer;
 }
