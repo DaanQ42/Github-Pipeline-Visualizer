@@ -30,16 +30,12 @@
 
       document.getElementById("host").innerHTML = host;
 
-      events.on("message", (data) => {
-        document.getElementById("data").innerHTML += data;
+      events.on_connection_state((state) => {
+        document.getElementById("status").innerHTML = state;
       });
-      events.on("open", () => {
-        document.getElementById("status").innerHTML = "Connected";
+      events.on_error((error) => {
+        document.getElementById("data").innerHTML += JSON.stringify(error);
       });
-      events.on("close", () => {
-        document.getElementById("status").innerHTML = "Disconnected";
-      });
-      events.on("");
     </script>
   </body>
 </html>

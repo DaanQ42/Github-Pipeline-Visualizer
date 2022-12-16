@@ -21,8 +21,7 @@
     <div class="container">
       <a id="data"></a>
     </div>
-
-    <script type="text/javascript">
+    <script type="module">
       import { EventConnection } from "./scripts/modules/websocket.mjs";
       const host = window.location.host;
       const events = new EventConnection(`ws://${host}/websockets`);
