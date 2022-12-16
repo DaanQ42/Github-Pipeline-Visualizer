@@ -61,7 +61,9 @@ export class EventConnection {
     this.ws.addEventListener("message", (msg) => {
       console.log("Message received", msg);
 
-      msg = JSON.parse(msg.data.toString());
+      const str = msg.data.toString();
+      console.log("Buffer converted to string", str);
+      msg = JSON.parse(str);
       console.log("Buffer parsed", msg);
 
       events.on_message.forEach((fn) => fn(msg));
